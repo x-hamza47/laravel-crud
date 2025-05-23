@@ -1,0 +1,4 @@
+body{
+    background: #212121 url('../images/img-1.jpg') no-repeat center center / cover fixed;
+    /* background-blend-mode: screen; */
+}
