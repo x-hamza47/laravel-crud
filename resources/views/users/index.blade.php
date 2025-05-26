@@ -23,12 +23,12 @@
                 <td scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $employee->employee_name }}</td>
                 <td>{{ $employee->email }}</td>
-                <td>{{ $employee->department }}</td>
+                <td>{{ $employee->department }}</td> 
                 <td>{{ $employee->salary }}</td>
                 <td>{{ $employee->city }}</td>
                 <td> <a href="{{ route('view.user',$employee->employee_id) }}" class="btn btn-primary btn-sm">View</a></td>
-                <td> <a href="" class="btn btn-warning btn-sm">Update</a></td>
-                <td> <a href="" class="btn btn-danger btn-sm">Delete</a></td>
+                <td> <a href="{{ route('emp.edit', $employee->employee_id) }}" class="btn btn-warning btn-sm">Update</a></td>
+                <td> <a href="{{ route('emp.delete', $employee->employee_id) }}" class="btn btn-danger btn-sm">Delete</a></td>
             </tr>
             @endforeach
 

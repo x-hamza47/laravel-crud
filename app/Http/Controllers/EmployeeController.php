@@ -41,6 +41,39 @@ class EmployeeController extends Controller
 
     public function singleUser(int $id){
         $employee = Employee::find($id);
+        return view('users.user',compact('employee'));
+    }
+
+    public function editUser(int $id){
+        $employee = Employee::find($id);
         return view('users.edit',compact('employee'));
     }
+
+    public function update(Request $request, Int $id){
+
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:employees,email,'. $id .',employee_id',
+            'department' => 'required|in:HR,QA,Networking,Development',
+            'salary' => 'required|numeric|min:0',
+            'city' => 'required|in:Karachi,Lahore,Islamabad'
+        ]);
+        
+        $employee = Employee::find($id);
+        $employee->update([
+            'employee_name' => $validated['name'],
+            'email' => $validated['email'],
+            'department' => $validated['department'],
+            'salary' => $validated['salary'],
+            'city' => $validated['city'],
+        ]);
+
+        return redirect()->route('emp.show')->with('Success','Employee updated Successfully');
+    }
+    
+    public function destroy(Int $id){
+        Employee::destroy($id);
+        return redirect()->route('emp.show')->with('Success','Employee updated Successfully');
+    }
+
 }
